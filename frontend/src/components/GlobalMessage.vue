@@ -10,7 +10,9 @@
       v-show="message.warnings.length > 0"
       class="mb-0"
     >
-      <p v-for="warning in message.warnings" :key="warning" class="mb-0">{{ warning }}</p>
+      <p v-for="warning in message.warnings" :key="warning" class="mb-0">
+        {{ warning }}
+      </p>
     </b-alert>
     <b-alert variant="info" show v-show="message.info" class="mb-0">
       {{ message.info }}
@@ -19,11 +21,18 @@
 </template>
 
 <script>
-  export default {
-    computed: {
-      message: function () {
-        return this.$store.state.message
-      }
-    }
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+export default {
+  setup() {
+    const store = useStore();
+    const message = computed(() => {
+      return store.state.message;
+    });
+    return {
+      message
+    };
   }
+};
 </script>

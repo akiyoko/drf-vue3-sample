@@ -31,13 +31,12 @@
   </div>
 
   <pre>form: {{ form }}</pre>
-  <pre>message: {{ message }}</pre>
-  <pre>{{ this.$store.getters["auth/username"] }}</pre>
+  <pre>state: {{ this.$store.state }}</pre>
 </template>
 
 <script>
 import { reactive, computed } from "vue";
-import store from "@/store";
+import { useStore } from "vuex";
 import api from "@/services/api";
 import GlobalHeader from "@/components/GlobalHeader.vue";
 import GlobalMessage from "@/components/GlobalMessage.vue";
@@ -49,7 +48,10 @@ export default {
   },
 
   setup() {
+    const store = useStore();
+
     // data
+    // 入力フォームの内容
     const form = reactive({
       book: {
         title: "",
@@ -58,6 +60,7 @@ export default {
     });
 
     // computed
+    // 本が登録済みかどうか
     const isCreated = computed(() => {
       return form.book.id !== undefined;
     });
@@ -65,6 +68,7 @@ export default {
     // methods
     // 登録・更新ボタン押下
     const submitSave = () => {
+      // 本の登録・更新を実行
       api({
         // 登録済みかどうかでHTTPメソッドとエンドポイントを切り替える
         method: isCreated.value ? "put" : "post",

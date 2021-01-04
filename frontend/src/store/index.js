@@ -37,7 +37,7 @@ const authModule = {
           // 認証用トークンをlocalStorageに保存
           localStorage.setItem("access", response.data.access);
           // ユーザー情報を取得してstoreのユーザー情報を更新
-          return context.dispatch("reload");
+          return context.dispatch("renew");
         });
     },
     /**
@@ -52,7 +52,7 @@ const authModule = {
     /**
      * ユーザー情報更新
      */
-    reload(context) {
+    renew(context) {
       return api.get("/auth/users/me/").then(response => {
         const user = response.data;
         // storeのユーザー情報を更新
