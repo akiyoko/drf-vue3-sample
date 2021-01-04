@@ -3,16 +3,15 @@ import api from "@/services/api";
 
 // 認証情報
 const authModule = {
-  strict: process.env.NODE_ENV !== "production",
   namespaced: true,
   state: {
     username: "",
     isLoggedIn: false
   },
-  getters: {
-    username: state => state.username,
-    isLoggedIn: state => state.isLoggedIn
-  },
+  //getters: {
+  //  username: state => state.username,
+  //  isLoggedIn: state => state.isLoggedIn
+  //},
   mutations: {
     set(state, payload) {
       state.username = payload.user.username;
@@ -65,18 +64,17 @@ const authModule = {
 
 // グローバルメッセージ
 const messageModule = {
-  strict: process.env.NODE_ENV !== "production",
   namespaced: true,
   state: {
     error: "",
     warnings: [],
     info: ""
   },
-  getters: {
-    error: state => state.error,
-    warnings: state => state.warnings,
-    info: state => state.info
-  },
+  //getters: {
+  //  error: state => state.error,
+  //  warnings: state => state.warnings,
+  //  info: state => state.info
+  //},
   mutations: {
     set(state, payload) {
       if (payload.error) {

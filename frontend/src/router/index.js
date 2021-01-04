@@ -29,7 +29,7 @@ const router = createRouter({
  * Routerで画面遷移する際に毎回実行されるナビゲーションガード
  */
 router.beforeEach(to => {
-  const isLoggedIn = store.getters["auth/isLoggedIn"];
+  const isLoggedIn = store.state.auth.isLoggedIn;
   const token = localStorage.getItem("access");
   console.log("to.path=", to.path);
   console.log("isLoggedIn=", isLoggedIn);

@@ -20,10 +20,10 @@
 export default {
   computed: {
     username: function() {
-      return this.$store.getters["auth/username"];
+      return this.$store.state.auth.username;
     },
     isLoggedIn: function() {
-      return this.$store.getters["auth/isLoggedIn"];
+      return this.$store.state.auth.isLoggedIn;
     }
   },
   methods: {
