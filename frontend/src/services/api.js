@@ -41,7 +41,7 @@ api.interceptors.response.use(
     let message;
     if (status === 400) {
       // バリデーションNG
-      let messages = [].concat.apply([], Object.values(error.response.data));
+      const messages = [].concat.apply([], Object.values(error.response.data));
       store.dispatch("message/setWarningMessages", { messages: messages });
     } else if (status === 401) {
       // 認証エラー
