@@ -8,10 +8,6 @@ const authModule = {
     username: "",
     isLoggedIn: false
   },
-  //getters: {
-  //  username: state => state.username,
-  //  isLoggedIn: state => state.isLoggedIn
-  //},
   mutations: {
     set(state, payload) {
       state.username = payload.user.username;
@@ -36,7 +32,7 @@ const authModule = {
           // 認証用トークンをlocalStorageに保存
           localStorage.setItem("access", response.data.access);
           // ユーザー情報を取得してstoreのユーザー情報を更新
-          return context.dispatch("renew");
+          context.dispatch("renew");
         });
     },
     /**
@@ -56,7 +52,6 @@ const authModule = {
         const user = response.data;
         // storeのユーザー情報を更新
         context.commit("set", { user: user });
-        return user;
       });
     }
   }
@@ -70,11 +65,6 @@ const messageModule = {
     warnings: [],
     info: ""
   },
-  //getters: {
-  //  error: state => state.error,
-  //  warnings: state => state.warnings,
-  //  info: state => state.info
-  //},
   mutations: {
     set(state, payload) {
       if (payload.error) {
