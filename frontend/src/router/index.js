@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store";
-import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
+import HomePage from "@/views/HomePage.vue";
+import LoginPage from "@/views/LoginPage.vue";
 
 const routes = [
   {
     path: "/",
-    component: Home,
+    component: HomePage,
     // ログインが必要な画面には「requiresAuth」フラグを付けておく
     meta: { requiresAuth: true }
   },
   {
     path: "/login",
-    component: Login
+    component: LoginPage
   },
   {
     path: "/:catchAll(.*)",
