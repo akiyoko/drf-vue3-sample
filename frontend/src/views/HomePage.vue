@@ -10,13 +10,13 @@
         <div class="row form-group">
           <label class="col-sm-3 col-form-label">タイトル</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" v-model="form.book.title" />
+            <input type="text" class="form-control" v-model="data.book.title" />
           </div>
         </div>
         <div class="row form-group">
           <label class="col-sm-3 col-form-label">価格</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" v-model="form.book.price" />
+            <input type="text" class="form-control" v-model="data.book.price" />
           </div>
         </div>
         <div class="row text-center mt-5">
@@ -30,7 +30,7 @@
     </main>
   </div>
 
-  <pre>form: {{ form }}</pre>
+  <pre>data: {{ data }}</pre>
   <pre>state: {{ this.$store.state }}</pre>
 </template>
 
@@ -51,8 +51,8 @@ export default {
     const store = useStore();
 
     // data
-    // 入力フォームの内容
-    const form = reactive({
+    // 入力フォームの内容をリアクティブにする
+    const data = reactive({
       book: {
         title: "",
         price: 0
@@ -62,7 +62,7 @@ export default {
     // computed
     // 本が登録済みかどうか
     const isCreated = computed(() => {
-      return form.book.id !== undefined;
+      return data.book.id !== undefined;
     });
 
     // methods
@@ -72,21 +72,21 @@ export default {
       api({
         // 登録済みかどうかでHTTPメソッドとエンドポイントを切り替える
         method: isCreated.value ? "put" : "post",
-        url: isCreated.value ? "/books/" + form.book.id + "/" : "/books/",
+        url: isCreated.value ? "/books/" + data.book.id + "/" : "/books/",
         data: {
-          id: form.book.id,
-          title: form.book.title,
-          price: form.book.price
+          id: data.book.id,
+          title: data.book.title,
+          price: data.book.price
         }
       }).then(response => {
         const message = isCreated.value ? "更新しました。" : "登録しました。";
         store.dispatch("message/setInfoMessage", { message: message });
-        form.book = response.data;
+        data.book = response.data;
       });
     };
 
     return {
-      form,
+      data,
       isCreated,
       submitSave
     };

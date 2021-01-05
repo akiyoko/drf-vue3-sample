@@ -10,13 +10,13 @@
         <div class="row form-group">
           <label class="col-sm-3 col-form-label">ユーザー名</label>
           <div class="col-sm-8">
-            <input type="text" v-model="form.username" required />
+            <input type="text" v-model="data.username" required />
           </div>
         </div>
         <div class="row form-group">
           <label class="col-sm-3 col-form-label">パスワード</label>
           <div class="col-sm-8">
-            <input type="password" v-model="form.password" required />
+            <input type="password" v-model="data.password" required />
           </div>
         </div>
         <div class="row text-center mt-5">
@@ -28,7 +28,7 @@
     </main>
   </div>
 
-  <pre>form: {{ form }}</pre>
+  <pre>data: {{ data }}</pre>
   <pre>state: {{ this.$store.state }}</pre>
 </template>
 
@@ -51,8 +51,8 @@ export default {
     const store = useStore();
 
     // data
-    // 入力フォームの内容
-    const form = reactive({
+    // 入力フォームの内容をリアクティブにする
+    const data = reactive({
       username: "",
       password: ""
     });
@@ -63,8 +63,8 @@ export default {
       // ログイン実行
       store
         .dispatch("auth/login", {
-          username: form.username,
-          password: form.password
+          username: data.username,
+          password: data.password
         })
         .then(() => {
           console.log("Login succeeded.");
@@ -78,7 +78,7 @@ export default {
     };
 
     return {
-      form,
+      data,
       submitLogin
     };
   }
