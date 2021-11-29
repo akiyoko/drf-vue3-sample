@@ -1,5 +1,5 @@
-Django==2.2.*
+Django==3.2.*
 djangorestframework==3.12.*
-djangorestframework-simplejwt==4.6.*
-django-cors-headers==3.6.*
+djangorestframework-simplejwt==4.8.*
+django-cors-headers==3.10.*
 djoser==2.1.*
