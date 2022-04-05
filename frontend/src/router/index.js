@@ -1,11 +1,31 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import LoginView from "../views/LoginView.vue";
 
 const routes = [
+  // {
+  //   path: "/",
+  //   component: HomePage,
+  //   // ログインが必要な画面には「requiresAuth」フラグを付けておく
+  //   meta: { requiresAuth: true }
+  // },
+  // {
+  //   path: "/login",
+  //   component: LoginPage
+  // },
+  // {
+  //   path: "/:catchAll(.*)",
+  //   redirect: "/"
+  // }
   {
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
   },
   {
     path: "/about",
