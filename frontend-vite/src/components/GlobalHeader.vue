@@ -20,7 +20,7 @@
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/auth.js";
-import { useMessageStore } from "@/stores/message.js";
+import { useMessageStore } from "../stores/message.js";
 
 export default {
   setup() {

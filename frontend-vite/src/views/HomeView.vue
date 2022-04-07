@@ -35,11 +35,11 @@
 <script>
 import { computed, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/auth.js";
-import { useMessageStore } from "@/stores/message.js";
-import api from "@/services/api";
-import GlobalHeader from "@/components/GlobalHeader.vue";
-import GlobalMessage from "@/components/GlobalMessage.vue";
+import { useAuthStore } from "../stores/auth.js";
+import { useMessageStore } from "../stores/message.js";
+import api from "../services/api";
+import GlobalHeader from "../components/GlobalHeader.vue";
+import GlobalMessage from "../components/GlobalMessage.vue";
 
 export default {
   components: {

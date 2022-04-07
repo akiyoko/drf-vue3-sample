@@ -17,7 +17,7 @@
 
 <script>
 import { storeToRefs } from "pinia";
-import { useMessageStore } from "@/stores/message.js";
+import { useMessageStore } from "../stores/message.js";
 
 export default {
   setup() {

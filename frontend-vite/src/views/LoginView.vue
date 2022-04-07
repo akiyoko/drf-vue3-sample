@@ -31,10 +31,10 @@
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/auth.js";
-import { useMessageStore } from "@/stores/message.js";
-import GlobalHeader from "@/components/GlobalHeader.vue";
-import GlobalMessage from "@/components/GlobalMessage.vue";
+import { useAuthStore } from "../stores/auth.js";
+import { useMessageStore } from "../stores/message.js";
+import GlobalHeader from "../components/GlobalHeader.vue";
+import GlobalMessage from "../components/GlobalMessage.vue";
 
 export default {
   name: "LoginView",
