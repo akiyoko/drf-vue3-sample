@@ -32,14 +32,20 @@ export default {
 
     // ログインボタン押下
     const clickLogin = () => {
+      // メッセージをクリア
       messageStore.clear();
-      router.replace("/login");
+      // ログイン画面に遷移
+      router.replace({ name: "login" });
     };
     // ログアウトリンク押下
     const clickLogout = () => {
+      // メッセージをクリア
+      messageStore.clear();
+      // ログアウト
       authStore.logout();
-      messageStore.setInfoMessage("ログアウトしました。");
-      router.replace("/login");
+      messageStore.showInfoMessage("ログアウトしました。");
+      // ログイン画面に遷移
+      router.replace({ name: "login" });
     };
 
     // テンプレートに公開

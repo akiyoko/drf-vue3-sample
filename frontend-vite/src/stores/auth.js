@@ -4,7 +4,9 @@ import api from "../services/api";
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
+    // ユーザー名
     username: "",
+    // ログイン状態
     isLoggedIn: false,
   }),
   actions: {

@@ -6,11 +6,8 @@ export const useMessageStore = defineStore({
     level: null,
     messages: [],
   }),
-  // getters: {
-  //   message: (state) => state.messages[0],
-  // },
   actions: {
-    // TODO: エラーオブジェクトからメッセージ表示
+    // エラーオブジェクトからメッセージ表示
     showMessage(error) {
       this.level = error.level || "error";
       this.messages = error.messages || [error.message];

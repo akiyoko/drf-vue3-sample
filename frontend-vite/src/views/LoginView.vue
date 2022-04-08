@@ -1,4 +1,5 @@
 <template>
+  <!-- メインエリア -->
   <main id="login-view">
     <GlobalHeader />
     <GlobalMessage />
@@ -8,10 +9,10 @@
         <h1>ログイン</h1>
       </div>
       <div>
-        <input v-model="data.username" label="ユーザー名" required />
+        <input v-model="user.username" label="ユーザー名" required />
         <input
           type="password"
-          v-model="data.password"
+          v-model="user.password"
           label="パスワード"
           required
         />
@@ -22,7 +23,8 @@
     </form>
   </main>
 
-  <pre>data: {{ data }}</pre>
+  <!-- デバッグエリア -->
+  <pre>user: {{ user }}</pre>
   <pre>authStore: {{ authStore }}</pre>
   <pre>messageStore: {{ messageStore }}</pre>
 </template>
@@ -50,7 +52,7 @@ export default {
     const messageStore = useMessageStore();
 
     // 入力フォームの内容をリアクティブにする
-    const data = reactive({
+    const user = reactive({
       username: "",
       password: "",
     });
@@ -61,27 +63,23 @@ export default {
       messageStore.clear();
       // ログイン実行
       authStore
-        .login(data.username, data.password)
+        .login(user.username, user.password)
         .then(() => {
-          console.log("Login succeeded.");
           messageStore.showInfoMessage("ログインしました。");
-          // クエリ文字列に「next」がなければ、ホーム画面へ
+          // ホーム画面に遷移（クエリ文字列「next」が指定されていれば指定画面に遷移）
           const next = route.query.next || "/";
           router.replace(next);
         })
         .catch((error) => {
-          // TODO: 必要？
-          // authStore.logout();
-          // TODO
-          console.log("error=", error);
           messageStore.showMessage(error);
         });
     };
 
     // テンプレートに公開
     return {
-      data,
+      user,
       submitLogin,
+      // デバッグ用
       authStore: storeToRefs(authStore),
       messageStore: storeToRefs(messageStore),
     };

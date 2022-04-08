@@ -1,4 +1,5 @@
 <template>
+  <!-- メインエリア -->
   <main id="home-view">
     <GlobalHeader />
     <GlobalMessage />
@@ -8,13 +9,13 @@
       <div class="row form-group">
         <label class="col-sm-3 col-form-label">タイトル</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" v-model="data.book.title" />
+          <input type="text" class="form-control" v-model="book.title" />
         </div>
       </div>
       <div class="row form-group">
         <label class="col-sm-3 col-form-label">価格</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" v-model="data.book.price" />
+          <input type="text" class="form-control" v-model="book.price" />
         </div>
       </div>
       <div class="row text-center mt-5">
@@ -27,7 +28,8 @@
     </form>
   </main>
 
-  <pre>data: {{ data }}</pre>
+  <!-- デバッグエリア -->
+  <pre>book: {{ book }}</pre>
   <pre>authStore: {{ authStore }}</pre>
   <pre>messageStore: {{ messageStore }}</pre>
 </template>
@@ -52,16 +54,14 @@ export default {
     const messageStore = useMessageStore();
 
     // 入力フォームの内容をリアクティブにする
-    const data = reactive({
-      book: {
-        title: "",
-        price: 0,
-      },
+    const book = reactive({
+      title: "",
+      price: 0,
     });
 
     // 本が登録済みかどうか
     const isCreated = computed(() => {
-      return data.book.id !== undefined;
+      return book.id !== undefined;
     });
 
     // 登録・更新ボタン押下
@@ -70,30 +70,33 @@ export default {
       api({
         // 登録済みかどうかでHTTPメソッドとエンドポイントを切り替える
         method: isCreated.value ? "put" : "post",
-        url: isCreated.value ? "/books/" + data.book.id + "/" : "/books/",
+        url: isCreated.value ? "/books/" + book.id + "/" : "/books/",
         data: {
-          id: data.book.id,
-          title: data.book.title,
-          price: data.book.price,
+          id: book.id,
+          title: book.title,
+          price: book.price,
         },
       })
         .then((response) => {
-          const message = isCreated.value ? "更新しました。" : "登録しました。";
-          messageStore.showInfoMessage(message);
-          data.book = response.data;
+          // レスポンスのデータをセット
+          // https://stackoverflow.com/a/65733741
+          // Object.assign(book, response.data)
+          book.id = response.data.id;
+          messageStore.showInfoMessage(
+            isCreated.value ? "更新しました。" : "登録しました。"
+          );
         })
         .catch((error) => {
-          // TODO
-          console.log("error=", error);
           messageStore.showMessage(error);
         });
     };
 
     // テンプレートに公開
     return {
-      data,
+      book,
       isCreated,
       submitSave,
+      // デバッグ用
       authStore: storeToRefs(authStore),
       messageStore: storeToRefs(messageStore),
     };
