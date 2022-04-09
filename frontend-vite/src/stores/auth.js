@@ -32,7 +32,7 @@ export const useAuthStore = defineStore({
     logout() {
       // 認証用トークンをlocalStorageから削除
       localStorage.removeItem("access");
-      // storeのユーザー情報をクリア
+      // ストアのユーザー情報をクリア
       this.username = "";
       this.isLoggedIn = false;
     },
@@ -42,7 +42,7 @@ export const useAuthStore = defineStore({
     renew() {
       return api.get("/auth/users/me/").then((response) => {
         const user = response.data;
-        // storeのユーザー情報を更新
+        // ストアのユーザー情報を更新
         this.username = user.username;
         this.isLoggedIn = true;
       });

@@ -23,6 +23,7 @@ export default {
   setup() {
     const messageStore = useMessageStore();
 
+    // リアクティビティを損なわずに分割代入するにはstoreToRefs()を利用する
     const { level, messages } = storeToRefs(messageStore);
 
     // テンプレートに公開

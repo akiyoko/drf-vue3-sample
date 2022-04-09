@@ -54,7 +54,6 @@ router.beforeEach((to) => {
  */
 function forceToLoginPage(to) {
   console.log("Force user to login page.");
-  // TODO: push or replace どっち？
   router.replace({
     name: "login",
     // 遷移しようとしたURLをクエリ文字列として付与

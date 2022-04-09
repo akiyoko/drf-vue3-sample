@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_ROOT_API,
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: import.meta.env.VITE_TIMEOUT_MS || 5000,
   headers: {
     "Content-Type": "application/json",
@@ -10,21 +10,15 @@ const api = axios.create({
 });
 
 // 共通前処理
-api.interceptors.request.use(
-  (config) => {
-    // 認証用トークンがあればリクエストヘッダに加える
-    const token = localStorage.getItem("access");
-    if (token) {
-      config.headers.Authorization = "JWT " + token;
-      return config;
-    }
+api.interceptors.request.use((config) => {
+  // 認証用トークンがあればリクエストヘッダに加える
+  const token = localStorage.getItem("access");
+  if (token) {
+    config.headers.Authorization = "JWT " + token;
     return config;
   }
-  // TODO: 不要？
-  // (error) => {
-  //   return Promise.reject(error);
-  // }
-);
+  return config;
+});
 
 // 共通後処理
 api.interceptors.response.use(
@@ -35,18 +29,16 @@ api.interceptors.response.use(
     switch (error.response?.status) {
       // バリデーションNG
       case 400: {
-        // TODO: 入れ子の配列をフラットな配列にする
+        // オブジェクトのプロパティの値（メッセージの配列）をフラットな配列に変換
         const messages = Object.values(error.response.data).flat();
         return Promise.reject({ level: "warning", messages: messages });
       }
       // 認証エラー
       case 401: {
-        // return Promise.reject({ level: "error", message: "認証エラー" });
         return Promise.reject(new Error("認証エラーです。"));
       }
       // 権限エラー
       case 403:
-        // return Promise.reject({ level: "error", message: "権限エラー" });
         return Promise.reject(new Error("権限エラーです。"));
       // その他のエラー
       default:

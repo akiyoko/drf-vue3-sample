@@ -55,7 +55,9 @@ export default {
 
     // 入力フォームの内容をリアクティブにする
     const book = reactive({
+      // タイトル
       title: "",
+      // 価格
       price: 0,
     });
 
@@ -64,8 +66,12 @@ export default {
       return book.id !== undefined;
     });
 
-    // 登録・更新ボタン押下
+    /**
+     * 登録・更新ボタン押下
+     */
     const submitSave = () => {
+      // メッセージをクリア
+      messageStore.clear();
       // 本の登録・更新を実行
       api({
         // 登録済みかどうかでHTTPメソッドとエンドポイントを切り替える
@@ -78,15 +84,16 @@ export default {
         },
       })
         .then((response) => {
-          // レスポンスのデータをセット
-          // https://stackoverflow.com/a/65733741
+          // レスポンスのデータでリアクティブなデータを書き換える
           // Object.assign(book, response.data)
           book.id = response.data.id;
+          // インフォメーションメッセージを表示
           messageStore.showInfoMessage(
             isCreated.value ? "更新しました。" : "登録しました。"
           );
         })
         .catch((error) => {
+          // エラー発生時はエラーメッセージを表示
           messageStore.showMessage(error);
         });
     };

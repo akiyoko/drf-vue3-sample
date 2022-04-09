@@ -11,4 +11,15 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  // index.html のアセットのパスの先頭に付けられるパス
+  // base: process.env.NODE_ENV === "production" ? "/static/" : "/",
+
+  build: {
+    // 出力先を「../static」にすると、index.html, favicon.ico もそこに配置されてしまうので、NG
+    // outDir: "../static",
+    // 「dist」配下を先に空っぽにする
+    // emptyOutDir: true,
+    // アセットを出力するディレクトリを「dist/assets」ではなく「dist/static/assets」に（index.html のアセットのパスも変更される）
+    assetsDir: "static/assets/",
+  },
 });

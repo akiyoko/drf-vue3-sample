@@ -28,21 +28,27 @@ export default {
     const authStore = useAuthStore();
     const messageStore = useMessageStore();
 
+    // リアクティビティを損なわずに分割代入するにはstoreToRefs()を利用する
     const { username, isLoggedIn } = storeToRefs(authStore);
 
-    // ログインボタン押下
+    /**
+     * ログインボタン押下
+     */
     const clickLogin = () => {
       // メッセージをクリア
       messageStore.clear();
       // ログイン画面に遷移
       router.replace({ name: "login" });
     };
-    // ログアウトリンク押下
+    /**
+     * ログアウトリンク押下
+     */
     const clickLogout = () => {
       // メッセージをクリア
       messageStore.clear();
       // ログアウト
       authStore.logout();
+      // インフォメーションメッセージを表示
       messageStore.showInfoMessage("ログアウトしました。");
       // ログイン画面に遷移
       router.replace({ name: "login" });
