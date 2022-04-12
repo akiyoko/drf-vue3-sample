@@ -1,5 +1,4 @@
 <template>
-  <!-- メインエリア -->
   <main id="home-view">
     <GlobalHeader />
     <GlobalMessage />

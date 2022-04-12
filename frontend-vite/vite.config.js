@@ -19,7 +19,8 @@ export default defineConfig({
     // outDir: "../static",
     // 「dist」配下を先に空っぽにする
     // emptyOutDir: true,
-    // アセットを出力するディレクトリを「dist/assets」ではなく「dist/static/assets」に（index.html のアセットのパスも変更される）
+    // アセットを出力するディレクトリを「assets」から「static/assets」に変更
+    // index.html のアセットのパスも変更される
     assetsDir: "static/assets/",
   },
 });

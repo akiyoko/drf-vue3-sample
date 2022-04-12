@@ -1,5 +1,4 @@
 <template>
-  <!-- メインエリア -->
   <main id="login-view">
     <GlobalHeader />
     <GlobalMessage />

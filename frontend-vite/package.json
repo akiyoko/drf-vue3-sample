@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "rsync -a --delete ./dist/static/assets/ ../static/assets/ && rsync -a ./dist/*.* ../templates/",
     "preview": "vite preview --port 5050",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
@@ -20,6 +21,7 @@
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
     "prettier": "^2.5.1",
+    "rsync": "^0.6.1",
     "vite": "^2.9.1"
   }
 }
