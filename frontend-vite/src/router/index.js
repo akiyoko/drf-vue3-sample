@@ -29,18 +29,15 @@ const router = createRouter({
 });
 
 /**
- * ルーターを使って画面遷移する際に毎回実行されるナビゲーションガード
+ * ルーターによる画面遷移の直前に実行されるナビゲーションガード
  */
 router.beforeEach((to) => {
-  console.log("to.path=", to.path);
-
   // ログイン状態を取得
   const authStore = useAuthStore();
   const isLoggedIn = authStore.isLoggedIn;
 
   // 未ログイン状態で、且つログインが必要な画面に遷移しようとした場合
   if (!isLoggedIn && to.meta.requiresAuth) {
-    console.log("Renew user state.");
     // ユーザー情報を再取得
     authStore.renew().catch(() => {
       // 再取得できなければログイン画面に強制送還
@@ -53,7 +50,6 @@ router.beforeEach((to) => {
  * ログイン画面に強制送還
  */
 function forceToLoginPage(to) {
-  console.log("Force user to login page.");
   router.replace({
     name: "login",
     // 遷移しようとしたURLをクエリ文字列として付与

@@ -8,6 +8,11 @@ export const useMessageStore = defineStore({
     // メッセージ（複数表示できるように管理）
     messages: [],
   }),
+  getters: {
+    isError: (state) => state.level === "error",
+    isWarning: (state) => state.level === "warning",
+    isInfo: (state) => state.level === "info",
+  },
   actions: {
     /**
      * エラーオブジェクトからメッセージ表示

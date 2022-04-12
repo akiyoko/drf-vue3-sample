@@ -22,7 +22,7 @@ export const useAuthStore = defineStore({
         .then((response) => {
           // 認証用トークンをlocalStorageに保存
           localStorage.setItem("access", response.data.access);
-          // ユーザー情報を取得してstoreのユーザー情報を更新
+          // ユーザー情報を取得してストアを更新
           this.renew();
         });
     },

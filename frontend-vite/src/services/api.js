@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_API_ROOT_URL,
   timeout: import.meta.env.VITE_TIMEOUT_MS || 5000,
   headers: {
     "Content-Type": "application/json",
@@ -15,7 +15,6 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem("access");
   if (token) {
     config.headers.Authorization = "JWT " + token;
-    return config;
   }
   return config;
 });
@@ -24,7 +23,6 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log("error=", error);
     // エラーの内容に応じた処理をする
     switch (error.response?.status) {
       // バリデーションNG

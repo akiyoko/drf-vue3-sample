@@ -1,5 +1,5 @@
 <template>
-  <main id="login-view">
+  <main>
     <GlobalHeader />
     <GlobalMessage />
 
@@ -8,10 +8,10 @@
         <h1>ログイン</h1>
       </div>
       <div>
-        <input v-model="user.username" label="ユーザー名" required />
+        <input v-model="loginForm.username" label="ユーザー名" required />
         <input
           type="password"
-          v-model="user.password"
+          v-model="loginForm.password"
           label="パスワード"
           required
         />
@@ -20,12 +20,12 @@
         <button color="primary" type="submit">ログイン</button>
       </div>
     </form>
-  </main>
 
-  <!-- デバッグエリア -->
-  <pre>user: {{ user }}</pre>
-  <pre>authStore: {{ authStore }}</pre>
-  <pre>messageStore: {{ messageStore }}</pre>
+    <!-- デバッグエリア -->
+    <pre>loginForm: {{ loginForm }}</pre>
+    <pre>authStore: {{ authStore }}</pre>
+    <pre>messageStore: {{ messageStore }}</pre>
+  </main>
 </template>
 
 <script>
@@ -51,7 +51,7 @@ export default {
     const messageStore = useMessageStore();
 
     // 入力フォームの内容をリアクティブにする
-    const user = reactive({
+    const loginForm = reactive({
       // ユーザー名
       username: "",
       // パスワード
@@ -66,7 +66,7 @@ export default {
       messageStore.clear();
       // ログイン実行
       authStore
-        .login(user.username, user.password)
+        .login(loginForm.username, loginForm.password)
         .then(() => {
           // インフォメーションメッセージを表示
           messageStore.showInfoMessage("ログインしました。");
@@ -82,7 +82,7 @@ export default {
 
     // テンプレートに公開
     return {
-      user,
+      loginForm,
       submitLogin,
       // デバッグ用
       authStore: storeToRefs(authStore),
