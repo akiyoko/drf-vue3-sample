@@ -23,7 +23,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // エラーの内容に応じた処理をする
+    // エラーの種類に応じたハンドリングをおこなう
     switch (error.response?.status) {
       // バリデーションNG
       case 400: {
