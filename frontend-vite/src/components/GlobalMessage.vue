@@ -21,6 +21,7 @@ import { useMessageStore } from "../stores/message.js";
 
 export default {
   setup() {
+    // ストアオブジェクトを取得
     const messageStore = useMessageStore();
 
     // リアクティビティを損なわずに分割代入するにはstoreToRefs()を利用する

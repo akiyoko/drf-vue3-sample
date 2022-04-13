@@ -24,9 +24,11 @@ import { useMessageStore } from "../stores/message.js";
 
 export default {
   setup() {
-    const router = useRouter();
+    // ストアオブジェクトを取得
     const authStore = useAuthStore();
     const messageStore = useMessageStore();
+    // ルーターオブジェクトを取得
+    const router = useRouter();
 
     // リアクティビティを損なわずに分割代入するにはstoreToRefs()を利用する
     const { username, isLoggedIn } = storeToRefs(authStore);
