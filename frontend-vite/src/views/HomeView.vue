@@ -86,8 +86,7 @@ export default {
         },
       })
         .then((response) => {
-          // レスポンスのデータでリアクティブなデータを書き換える
-          // Object.assign(bookForm, response.data)
+          // レスポンスのデータでリアクティブなデータを更新する
           bookId.value = response.data.id;
           // インフォメーションメッセージを表示
           messageStore.showInfoMessage(
