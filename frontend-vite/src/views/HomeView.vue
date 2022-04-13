@@ -8,13 +8,13 @@
       <div class="row form-group">
         <label class="col-sm-3 col-form-label">タイトル</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" v-model="bookForm.title" />
+          <input type="text" class="form-control" v-model="bookTitle" />
         </div>
       </div>
       <div class="row form-group">
         <label class="col-sm-3 col-form-label">価格</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" v-model="bookForm.price" />
+          <input type="text" class="form-control" v-model="bookPrice" />
         </div>
       </div>
       <div class="row text-center mt-5">
@@ -27,14 +27,17 @@
     </form>
 
     <!-- デバッグエリア -->
-    <pre>bookForm: {{ bookForm }}</pre>
+    <pre>bookTitle: {{ bookTitle }}</pre>
+    <pre>bookPrice: {{ bookPrice }}</pre>
+    <pre>bookId: {{ bookId }}</pre>
+    <pre>isCreated: {{ isCreated }}</pre>
     <pre>authStore: {{ authStore }}</pre>
     <pre>messageStore: {{ messageStore }}</pre>
   </main>
 </template>
 
 <script>
-import { computed, reactive } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "../stores/auth.js";
 import { useMessageStore } from "../stores/message.js";
@@ -53,16 +56,16 @@ export default {
     const messageStore = useMessageStore();
 
     // 入力フォームの内容をリアクティブにする
-    const bookForm = reactive({
-      // タイトル
-      title: "",
-      // 価格
-      price: 0,
-    });
+    // タイトル
+    const bookTitle = ref("");
+    // 価格
+    const bookPrice = ref(0);
+    // 本のID（更新時に利用）
+    const bookId = ref();
 
     // 本が登録済みかどうか
     const isCreated = computed(() => {
-      return bookForm.id !== undefined;
+      return bookId.value !== undefined;
     });
 
     /**
@@ -75,17 +78,17 @@ export default {
       api({
         // 登録済みかどうかでHTTPメソッドとエンドポイントを切り替える
         method: isCreated.value ? "put" : "post",
-        url: isCreated.value ? "/books/" + bookForm.id + "/" : "/books/",
+        url: isCreated.value ? "/books/" + bookId.value + "/" : "/books/",
         data: {
-          id: bookForm.id,
-          title: bookForm.title,
-          price: bookForm.price,
+          id: bookId.value,
+          title: bookTitle.value,
+          price: bookPrice.value,
         },
       })
         .then((response) => {
           // レスポンスのデータでリアクティブなデータを書き換える
           // Object.assign(bookForm, response.data)
-          bookForm.id = response.data.id;
+          bookId.value = response.data.id;
           // インフォメーションメッセージを表示
           messageStore.showInfoMessage(
             isCreated.value ? "更新しました。" : "登録しました。"
@@ -99,10 +102,12 @@ export default {
 
     // テンプレートに公開
     return {
-      bookForm,
+      bookTitle,
+      bookPrice,
       isCreated,
       submitSave,
       // デバッグ用
+      bookId,
       authStore: storeToRefs(authStore),
       messageStore: storeToRefs(messageStore),
     };

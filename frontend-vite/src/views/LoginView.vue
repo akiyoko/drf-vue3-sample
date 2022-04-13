@@ -8,13 +8,8 @@
         <h1>ログイン</h1>
       </div>
       <div>
-        <input v-model="loginForm.username" label="ユーザー名" required />
-        <input
-          type="password"
-          v-model="loginForm.password"
-          label="パスワード"
-          required
-        />
+        <input v-model="username" label="ユーザー名" required />
+        <input type="password" v-model="password" label="パスワード" required />
       </div>
       <div>
         <button color="primary" type="submit">ログイン</button>
@@ -22,14 +17,15 @@
     </form>
 
     <!-- デバッグエリア -->
-    <pre>loginForm: {{ loginForm }}</pre>
+    <pre>username: {{ username }}</pre>
+    <pre>password: {{ password }}</pre>
     <pre>authStore: {{ authStore }}</pre>
     <pre>messageStore: {{ messageStore }}</pre>
   </main>
 </template>
 
 <script>
-import { reactive } from "vue";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "../stores/auth.js";
@@ -51,12 +47,10 @@ export default {
     const messageStore = useMessageStore();
 
     // 入力フォームの内容をリアクティブにする
-    const loginForm = reactive({
-      // ユーザー名
-      username: "",
-      // パスワード
-      password: "",
-    });
+    // ユーザー名
+    const username = ref("");
+    // パスワード
+    const password = ref("");
 
     /**
      * ログインボタン押下
@@ -66,7 +60,7 @@ export default {
       messageStore.clear();
       // ログイン実行
       authStore
-        .login(loginForm.username, loginForm.password)
+        .login(username.value, password.value)
         .then(() => {
           // インフォメーションメッセージを表示
           messageStore.showInfoMessage("ログインしました。");
@@ -82,7 +76,8 @@ export default {
 
     // テンプレートに公開
     return {
-      loginForm,
+      username,
+      password,
       submitLogin,
       // デバッグ用
       authStore: storeToRefs(authStore),
