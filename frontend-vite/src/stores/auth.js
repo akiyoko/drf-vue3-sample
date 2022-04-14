@@ -14,6 +14,7 @@ export const useAuthStore = defineStore({
      * ログイン
      */
     login(username, password) {
+      // ログインAPIにPOSTリクエスト
       return api
         .post("/auth/jwt/create/", {
           username: username,
@@ -40,6 +41,7 @@ export const useAuthStore = defineStore({
      * ユーザー情報更新
      */
     renew() {
+      // ユーザー情報取得APIにGETリクエスト
       return api.get("/auth/users/me/").then((response) => {
         const user = response.data;
         // ストアのユーザー情報を更新

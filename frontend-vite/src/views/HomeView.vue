@@ -46,6 +46,7 @@ import GlobalHeader from "../components/GlobalHeader.vue";
 import GlobalMessage from "../components/GlobalMessage.vue";
 
 export default {
+  name: "HomeView",
   components: {
     GlobalHeader,
     GlobalMessage,
@@ -89,13 +90,13 @@ export default {
           // レスポンスのデータでリアクティブなデータを更新する
           bookId.value = response.data.id;
           // インフォメーションメッセージを表示
-          messageStore.showInfoMessage(
+          messageStore.setInfoMessage(
             isCreated.value ? "更新しました。" : "登録しました。"
           );
         })
         .catch((error) => {
           // エラー発生時はエラーメッセージを表示
-          messageStore.showMessage(error);
+          messageStore.setMessage(error);
         });
     };
 

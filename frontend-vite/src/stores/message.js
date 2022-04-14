@@ -15,35 +15,35 @@ export const useMessageStore = defineStore({
   },
   actions: {
     /**
-     * エラーオブジェクトからメッセージ表示
+     * Errorオブジェクトを使ってエラーメッセージをセット
      */
-    showMessage(error) {
-      this.level = error.level || "error";
-      this.messages = error.messages || [error.message];
+    setError(errorObj) {
+      this.level = errorObj.level || "error";
+      this.messages = errorObj.messages || [errorObj.message];
     },
     /**
-     * エラーメッセージ表示
+     * エラーメッセージをセット
      */
-    showErrorMessage(message) {
+    setErrorMessage(message) {
       this.level = "error";
       this.messages = [message];
     },
     /**
-     * 警告メッセージ（複数）表示
+     * ワーニングメッセージ（複数）をセット
      */
-    showWarningMessages(messages) {
+    setWarningMessages(messages) {
       this.level = "warning";
       this.messages = messages;
     },
     /**
-     * インフォメーションメッセージ表示
+     * インフォメーションメッセージをセット
      */
-    showInfoMessage(message) {
+    setInfoMessage(message) {
       this.level = "info";
       this.messages = [message];
     },
     /**
-     * 全メッセージ非表示
+     * 全メッセージをクリア
      */
     clear() {
       this.level = null;

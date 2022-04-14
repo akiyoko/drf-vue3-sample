@@ -64,14 +64,14 @@ export default {
         .login(username.value, password.value)
         .then(() => {
           // インフォメーションメッセージを表示
-          messageStore.showInfoMessage("ログインしました。");
+          messageStore.setInfoMessage("ログインしました。");
           // ホーム画面に遷移（クエリ文字列「next」が指定されていれば指定画面に遷移）
           const next = route.query.next || "/";
           router.replace(next);
         })
         .catch((error) => {
           // エラー発生時はエラーメッセージを表示
-          messageStore.showMessage(error);
+          messageStore.setError(error);
         });
     };
 

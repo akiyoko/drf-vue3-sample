@@ -51,7 +51,7 @@ export default {
       // ログアウト
       authStore.logout();
       // インフォメーションメッセージを表示
-      messageStore.showInfoMessage("ログアウトしました。");
+      messageStore.setInfoMessage("ログアウトしました。");
       // ログイン画面に遷移
       router.replace({ name: "login" });
     };
