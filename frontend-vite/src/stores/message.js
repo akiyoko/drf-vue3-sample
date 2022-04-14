@@ -5,7 +5,7 @@ export const useMessageStore = defineStore({
   state: () => ({
     // メッセージレベル
     level: null,
-    // メッセージ（複数表示できるように管理）
+    // メッセージ（複数メッセージを管理）
     messages: [],
   }),
   getters: {

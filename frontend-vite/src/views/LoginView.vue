@@ -42,6 +42,7 @@ export default {
 
   setup() {
     const router = useRouter();
+    // 現在のパスに対応するルートを取得
     const route = useRoute();
     const authStore = useAuthStore();
     const messageStore = useMessageStore();
