@@ -34,7 +34,7 @@ export default {
     const { username, isLoggedIn } = storeToRefs(authStore);
 
     /**
-     * ログインボタン押下
+     * ログインリンク押下
      */
     const clickLogin = () => {
       // メッセージをクリア
