@@ -32,9 +32,8 @@ api.interceptors.response.use(
         return Promise.reject({ level: "warning", messages: messages });
       }
       // 認証エラー
-      case 401: {
+      case 401:
         return Promise.reject(new Error("認証エラーです。"));
-      }
       // 権限エラー
       case 403:
         return Promise.reject(new Error("権限エラーです。"));

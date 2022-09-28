@@ -16,15 +16,16 @@ export const useAuthStore = defineStore({
     login(username, password) {
       // ログインAPIにPOSTリクエスト
       return api
-        .post("/auth/jwt/create/", {
+        .post("/auth/login/", {
           username: username,
           password: password,
         })
         .then((response) => {
           // 認証用トークンをlocalStorageに保存
-          localStorage.setItem("access", response.data.access);
-          // ユーザー情報を取得してストアを更新
-          this.renew();
+          localStorage.setItem("access", response.data.access_token);
+          // ストアのユーザー情報を更新
+          this.username = response.data.user.username;
+          this.isLoggedIn = true;
         });
     },
     /**
@@ -42,10 +43,9 @@ export const useAuthStore = defineStore({
      */
     renew() {
       // ユーザー情報取得APIにGETリクエスト
-      return api.get("/auth/users/me/").then((response) => {
-        const user = response.data;
+      return api.get("/auth/user/").then((response) => {
         // ストアのユーザー情報を更新
-        this.username = user.username;
+        this.username = response.data.username;
         this.isLoggedIn = true;
       });
     },

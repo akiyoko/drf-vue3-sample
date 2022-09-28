@@ -61,7 +61,7 @@ export default {
     const bookTitle = ref("");
     // 価格
     const bookPrice = ref(0);
-    // 本のID（更新時に利用）
+    // 更新時に利用する本のID（デフォルト値はundefined）
     const bookId = ref();
 
     // 本が登録済みかどうか
@@ -96,7 +96,7 @@ export default {
         })
         .catch((error) => {
           // エラー発生時はエラーメッセージを表示
-          messageStore.setMessage(error);
+          messageStore.setError(error);
         });
     };
 

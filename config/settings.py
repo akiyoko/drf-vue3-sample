@@ -41,7 +41,8 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'rest_framework',
-    'djoser',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
     'corsheaders',
 
     # My applications
@@ -141,9 +142,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ],
 }
+
+# dj-rest-auth
+REST_USE_JWT = True
+# トークンをCookieに保存したい場合は、以下の設定をするだけでOK
+# JWT_AUTH_COOKIE = 'access'
+# JWT_AUTH_REFRESH_COOKIE = 'refresh'
 
 # Simple JWT
 SIMPLE_JWT = {
