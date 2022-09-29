@@ -152,7 +152,7 @@ REST_USE_JWT = True
 # JWT_AUTH_COOKIE = 'access'
 # JWT_AUTH_REFRESH_COOKIE = 'refresh'
 
-# Simple JWT
+# django-rest-framework-simplejwt
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
