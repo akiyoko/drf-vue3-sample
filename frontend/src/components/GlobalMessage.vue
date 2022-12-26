@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #message {
   min-height: 110px;
 }
