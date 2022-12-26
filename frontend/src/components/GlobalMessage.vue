@@ -42,7 +42,4 @@ export default {
 #message {
   min-height: 110px;
 }
-a.v-btn {
-  text-transform: none;
-}
 </style>

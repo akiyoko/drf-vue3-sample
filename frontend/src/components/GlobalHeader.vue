@@ -74,9 +74,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-button.v-btn {
-  text-transform: none;
-}
-</style>
