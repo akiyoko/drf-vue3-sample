@@ -39,6 +39,9 @@ export default {
 </script>
 
 <style>
+#message {
+  min-height: 110px;
+}
 a.v-btn {
   text-transform: none;
 }
