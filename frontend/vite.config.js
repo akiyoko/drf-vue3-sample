@@ -11,4 +11,10 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  // ここから追記
+  build: {
+    // アセットを出力するディレクトリを「assets」から「static/spa」に変更
+    // index.html のアセットのパスも変更される
+    assetsDir: "static/spa/",
+  },
 });
