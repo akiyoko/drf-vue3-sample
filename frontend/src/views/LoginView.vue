@@ -69,11 +69,13 @@ export default {
   },
 
   setup() {
+    // ストアオブジェクトを取得
+    const authStore = useAuthStore();
+    const messageStore = useMessageStore();
+    // ルーターオブジェクトを取得
     const router = useRouter();
     // 現在のパスに対応するルートを取得
     const route = useRoute();
-    const authStore = useAuthStore();
-    const messageStore = useMessageStore();
 
     // 入力フォームの内容をリアクティブにする
     // ユーザー名

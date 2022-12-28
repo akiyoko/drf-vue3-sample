@@ -23,7 +23,6 @@ export default {
   setup() {
     // ストアオブジェクトを取得
     const messageStore = useMessageStore();
-
     // リアクティビティを損なわずに分割代入するにはstoreToRefs関数を利用する
     const { messages, isError, isWarning, isInfo } = storeToRefs(messageStore);
 

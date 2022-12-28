@@ -62,6 +62,7 @@ export default {
   },
 
   setup() {
+    // ストアオブジェクトを取得
     const authStore = useAuthStore();
     const messageStore = useMessageStore();
 
