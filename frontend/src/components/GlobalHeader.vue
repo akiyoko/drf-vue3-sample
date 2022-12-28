@@ -38,7 +38,7 @@ export default {
     // ルーターオブジェクトを取得
     const router = useRouter();
 
-    // リアクティビティを損なわずに分割代入するにはstoreToRefs()を利用する
+    // リアクティビティを損なわずに分割代入するにはstoreToRefs関数を利用する
     const { username, isLoggedIn } = storeToRefs(authStore);
 
     /**
