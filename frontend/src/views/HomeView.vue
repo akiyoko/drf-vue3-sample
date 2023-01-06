@@ -97,12 +97,12 @@ export default {
         },
       })
         .then((response) => {
-          // レスポンスのデータでリアクティブなデータを更新する
-          bookId.value = response.data.id;
           // インフォメーションメッセージを表示
           messageStore.setInfoMessage(
             isCreated.value ? "更新しました。" : "登録しました。"
           );
+          // レスポンスのデータでリアクティブなデータを更新する
+          bookId.value = response.data.id;
         })
         .catch((error) => {
           // エラー発生時はエラーメッセージを表示
