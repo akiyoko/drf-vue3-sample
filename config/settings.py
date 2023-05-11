@@ -139,11 +139,18 @@ REST_FRAMEWORK = {
     ],
 }
 
-# dj-rest-auth
+# dj-rest-auth (< 3.0.0)
 REST_USE_JWT = True
 # トークンをCookieに保存したい場合は、以下の設定をするだけでOK
 # JWT_AUTH_COOKIE = 'access'
 # JWT_AUTH_REFRESH_COOKIE = 'refresh'
+# dj-rest-auth (>= 3.0.0)
+# REST_AUTH = {
+#     'USE_JWT': True,
+#     # トークンをCookieに保存したい場合は、以下の設定をするだけでOK
+#     # 'JWT_AUTH_COOKIE': 'access',
+#     # 'JWT_AUTH_REFRESH_COOKIE': 'refresh',
+# }
 
 # django-rest-framework-simplejwt
 SIMPLE_JWT = {
